@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: mysql-rs
+  namespace: mysql
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      imagePullSecrets:
+        - name: ecr-creds
+      containers:
+        - name: mysql
+          image: 788035713994.dkr.ecr.us-east-1.amazonaws.com/clo835-mysql:v1
+          ports:
+            - containerPort: 3306

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: web-rs
+  namespace: web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: employees
+  template:
+    metadata:
+      labels:
+        app: employees
+    spec:
+      imagePullSecrets:
+        - name: ecr-creds
+      containers:
+        - name: web
+          image: 788035713994.dkr.ecr.us-east-1.amazonaws.com/clo835-web:v1
+          ports:
+            - containerPort: 8080

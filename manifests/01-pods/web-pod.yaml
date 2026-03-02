@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-pod
+  namespace: web
+  labels:
+    app: employees
+spec:
+  imagePullSecrets:
+    - name: ecr-creds
+  containers:
+    - name: web
+      image: 788035713994.dkr.ecr.us-east-1.amazonaws.com/clo835-web:v1
+      ports:
+        - containerPort: 8080
